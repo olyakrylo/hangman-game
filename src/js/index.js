@@ -3,11 +3,11 @@ let words = [
     'frontend',
     'hangman',
     'application',
-    'randomword',
     'function',
+    'object',
     'animation',
-    'pacification',
-    'imagination'
+    'imagination',
+    'neighbour'
 ];
 
 let isKeyboardShowing = false;
@@ -83,6 +83,7 @@ function startGame() {
     let keyboard = document.querySelector('.hangman__keyboard');
     keyboard.onclick = function(e) {
         if (e.target.tagName !== 'SPAN') return;
+        e.target.style.visibility = 'hidden';
         gameState.update(e.target.textContent.toLowerCase());
     }
 }
@@ -145,6 +146,9 @@ button.addEventListener('click', () => {
     }
     for (let bodyPart of document.querySelector('#man').children) {
         bodyPart.style.display = 'none';
+    }
+    for (let letter of document.querySelectorAll('.hangman__keyboard span')) {
+        letter.style.visibility = 'visible';
     }
 
     document.querySelector('.hangman__end-game').style.display = 'none';
