@@ -83,7 +83,7 @@ function startGame() {
     let keyboard = document.querySelector('.hangman__keyboard');
     keyboard.onclick = function(e) {
         if (e.target.tagName !== 'SPAN') return;
-        e.target.style.visibility = 'hidden';
+        e.target.style.color = '#A0522D';
         gameState.update(e.target.textContent.toLowerCase());
     }
 }
@@ -148,7 +148,7 @@ button.addEventListener('click', () => {
         bodyPart.style.display = 'none';
     }
     for (let letter of document.querySelectorAll('.hangman__keyboard span')) {
-        letter.style.visibility = 'visible';
+        letter.style.color = '#008080';
     }
 
     document.querySelector('.hangman__end-game').style.display = 'none';
