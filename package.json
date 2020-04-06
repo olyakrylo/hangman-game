@@ -1,0 +1,28 @@
+{
+  "name": "hangman-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "node-sass --watch src/sass --output-style compressed -o dist/css",
+    "serve": "browser-sync start --server --files 'dist/css/*.css, **/*.html'",
+    "start": "run-p serve sass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olyakrylo/hangman-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olyakrylo/hangman-game/issues"
+  },
+  "homepage": "https://github.com/olyakrylo/hangman-game#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "node-sass": "^4.13.1",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^6.1.0"
+  }
+}
