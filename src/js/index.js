@@ -112,6 +112,12 @@ function showPopup() {
 function addRightLetter(letter, i) {
     let wordField = document.querySelector('.game__input');
     wordField.children[i].textContent = letter;
+    // setTimeout(() => {
+    //     wordField.children[i].classList.add('game__letter_up');
+    //     setTimeout(() => {
+    //         wordField.children[i].classList.remove('game__letter_up');
+    //     }, 300);
+    // }, 1000);
 }
 
 
@@ -126,13 +132,48 @@ function addWrongLetter(letter) {
 
 
 function endGame(isWon) {
-    let finalWindow = document.querySelector('.hangman__end-game');
-    finalWindow.querySelector('.end-game__title').textContent = isWon ? 'YOU WON!' : 'You lost :(';
-    finalWindow.style.display = 'flex';
+    // for (let child of document.querySelector('.game__input').children) {
+    //     setTimeout(() => {
+    //     child.classList.add('game__letter_up');
+    //     setTimeout(() => {
+    //         child.classList.remove('game__letter_up');
+    //         }, 500);
+    //     }, 0);
+    // }
+    let wordField = document.querySelector('.game__input');
+    let i = 0;
+    let up = setInterval(() => {
+        let child = wordField.children[i];
+        child.classList.add('game__letter_up');
+        i++;
+        if (i === wordField.children.length) {
+            clearInterval(up);
+        }
+        setTimeout(() => {
+            child.classList.remove('game__letter_up');
+        }, 400);
+        // i++;
+        // if (i === wordField.children.length) {
+        //     clearInterval(up);
+        // }
+    }, 100);
 
-    let finalMessage = document.querySelector('.end-game__window');
-    finalMessage.style.top = document.documentElement.clientHeight / 2 - 75 + 'px';
-    finalMessage.style.left = document.documentElement.clientWidth / 2 - 135 + 'px';
+    setTimeout(() => {
+        let finalWindow = document.querySelector('.hangman__end-game');
+        finalWindow.querySelector('.end-game__title').textContent = isWon ? 'YOU WON!' : 'You lost :(';
+        finalWindow.style.display = 'flex';
+
+        let finalMessage = document.querySelector('.end-game__window');
+        finalMessage.style.top = document.documentElement.clientHeight / 2 - 75 + 'px';
+        finalMessage.style.left = document.documentElement.clientWidth / 2 - 135 + 'px';
+    }, gameState.word.length * 100 + 1000);
+    // let finalWindow = document.querySelector('.hangman__end-game');
+    // finalWindow.querySelector('.end-game__title').textContent = isWon ? 'YOU WON!' : 'You lost :(';
+    // finalWindow.style.display = 'flex';
+
+    // let finalMessage = document.querySelector('.end-game__window');
+    // finalMessage.style.top = document.documentElement.clientHeight / 2 - 75 + 'px';
+    // finalMessage.style.left = document.documentElement.clientWidth / 2 - 135 + 'px';
 }
 
 

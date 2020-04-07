@@ -95,6 +95,7 @@ body
     #head, #body, #leftArm, #rightArm, #leftLeg, #rightLeg
         display: none
         animation: fadeIn .5s
+        stroke: $brown
 
     @media ( max-width: 500px )
         height: 120px
@@ -119,12 +120,16 @@ body
     border-bottom: 3px solid $blue
     color: $brown
     line-height: 38px
+    transition: padding-bottom .4s ease-in-out
 
     @media ( max-width: 500px )
         margin: 0 2px
         font-size: 16px
         width: 16px
         line-height: 22px
+
+.game__letter_up
+    padding-bottom: 25px
     
 
 .game__wrong-field
@@ -166,15 +171,24 @@ body
         cursor: pointer
 
 .hangman__keyboard
-    width: 90%
+    width: 100%
     text-align: center
+    word-break: break-word
     padding: 0
     font-size: 30px
-    line-height: 40px
-    letter-spacing: 20px
+    line-height: 45px
     color: $blue
     margin: 0 auto
     animation: fadeIn .7s
+
+    > span
+        margin: 0 15px
+
+    // > div
+        // background-color: red
+        // width: min-content
+        // margin: 0 auto
+        // ta
 
 .hangman__keyboard_hidden
     display: none
