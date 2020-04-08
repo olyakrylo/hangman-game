@@ -1,13 +1,18 @@
 let words = [
-    'javascript',
-    'frontend',
     'hangman',
     'application',
     'function',
     'object',
     'animation',
     'imagination',
-    'neighbour'
+    'neighbour',
+    'basement',
+    'airplane',
+    'birthday',
+    'engineer',
+    'programming',
+    'excellence',
+    'advance'
 ];
 
 let isKeyboardShowing = false;
@@ -25,6 +30,7 @@ let gameState = {
     rightLetters: 0,
     uniqueLetters: 0,
     bodyParts: [],
+    score: 0,
 
     update: function(letter) {
         if (this.usedLetters.has(letter)) {
@@ -47,6 +53,16 @@ let gameState = {
             addWrongLetter(letter);
             let part = this.bodyParts.shift();
             document.querySelector(`#${part}`).style.display = 'inline';
+            // document.querySelector(`#${part}`).classList.add('part_show');
+            // if (part === 'body') {
+                // document.querySelector(`#${part}`).setAttribute('y2', '17');
+            //     let body = document.querySelector('#body');
+            //     let i = 9;
+            //     let interval = setInterval(() => {
+            //         body.setAttribute('y2', i++);
+            //         if (i > 17) clearInterval(interval);
+            //     }, 10);
+            // }
         }
     
         if (this.rightLetters === this.uniqueLetters) {
@@ -112,12 +128,6 @@ function showPopup() {
 function addRightLetter(letter, i) {
     let wordField = document.querySelector('.game__input');
     wordField.children[i].textContent = letter;
-    // setTimeout(() => {
-    //     wordField.children[i].classList.add('game__letter_up');
-    //     setTimeout(() => {
-    //         wordField.children[i].classList.remove('game__letter_up');
-    //     }, 300);
-    // }, 1000);
 }
 
 
@@ -132,14 +142,6 @@ function addWrongLetter(letter) {
 
 
 function endGame(isWon) {
-    // for (let child of document.querySelector('.game__input').children) {
-    //     setTimeout(() => {
-    //     child.classList.add('game__letter_up');
-    //     setTimeout(() => {
-    //         child.classList.remove('game__letter_up');
-    //         }, 500);
-    //     }, 0);
-    // }
     let wordField = document.querySelector('.game__input');
     let i = 0;
     let up = setInterval(() => {
@@ -152,28 +154,20 @@ function endGame(isWon) {
         setTimeout(() => {
             child.classList.remove('game__letter_up');
         }, 400);
-        // i++;
-        // if (i === wordField.children.length) {
-        //     clearInterval(up);
-        // }
     }, 100);
+
+    gameState.score = isWon ? gameState.score + 1 : 0;
 
     setTimeout(() => {
         let finalWindow = document.querySelector('.hangman__end-game');
-        finalWindow.querySelector('.end-game__title').textContent = isWon ? 'YOU WON!' : 'You lost :(';
-        finalWindow.style.display = 'flex';
-
-        let finalMessage = document.querySelector('.end-game__window');
-        finalMessage.style.top = document.documentElement.clientHeight / 2 - 75 + 'px';
-        finalMessage.style.left = document.documentElement.clientWidth / 2 - 135 + 'px';
+        let finalMessage = finalWindow.querySelector('.end-game__title');
+        finalMessage.textContent = isWon ? 'YOU WON!' : 'You lost :(';
+        document.querySelector('.end-game__score').textContent = 'Score: ' + gameState.score;
+        finalWindow.classList.add('hangman__end-game_show');
+        setTimeout(() => {
+            document.querySelector('.end-game__window').classList.add('end-game__window_show');
+        }, 0);
     }, gameState.word.length * 100 + 1000);
-    // let finalWindow = document.querySelector('.hangman__end-game');
-    // finalWindow.querySelector('.end-game__title').textContent = isWon ? 'YOU WON!' : 'You lost :(';
-    // finalWindow.style.display = 'flex';
-
-    // let finalMessage = document.querySelector('.end-game__window');
-    // finalMessage.style.top = document.documentElement.clientHeight / 2 - 75 + 'px';
-    // finalMessage.style.left = document.documentElement.clientWidth / 2 - 135 + 'px';
 }
 
 
@@ -192,8 +186,10 @@ button.addEventListener('click', () => {
         letter.style.color = '#008080';
     }
 
-    document.querySelector('.hangman__end-game').style.display = 'none';
-    document.querySelector('.end-game__window').style.top = '-200px';
+    document.querySelector('.end-game__window').classList.remove('end-game__window_show');
+    setTimeout(() => {
+        document.querySelector('.hangman__end-game').classList.remove('hangman__end-game_show');
+    }, 500)
 
     startGame();
 })
