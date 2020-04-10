@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "node-sass --watch src/sass --output-style compressed -o dist/css",
+    "sass": "node-sass --watch src/sass/styles.sass --output-style compressed -o dist/css/",
     "serve": "browser-sync start --server --files 'dist/css/*.css, **/*.html'",
     "start": "run-p serve sass"
   },

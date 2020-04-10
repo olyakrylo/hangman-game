@@ -3,12 +3,21 @@
 .hangman__popup
     position: fixed
     top: 15%
-    left: -200px
-    transition: left .5s ease-in-out
-    width: 150px
-    text-align: center
+    left: -500px
+    width: max-content
+    height: 70px
+    padding: 0 20px
     border-top-right-radius: 10px
     border-bottom-right-radius: 10px
     background-color: white
     color: $brown
     box-shadow: 4px 4px 15px rgba(0,0,0,0.1)
+    transition: left .5s ease-in-out
+
+    p
+        line-height: 70px
+        margin: 0
+        padding: 0
+
+.hangman__popup_show
+    left: 0

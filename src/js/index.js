@@ -34,7 +34,7 @@ let gameState = {
 
     update: function(letter) {
         if (this.usedLetters.has(letter)) {
-            showPopup();
+            showPopup('Already used');
             return;
         }
         this.usedLetters.add(letter);
@@ -92,7 +92,12 @@ function startGame() {
 
     document.onkeyup = function(e) {
         let letter = e.key.toLowerCase();
-        if (letter.length !== 1 || letter.charCodeAt(0) < 97 || letter.charCodeAt(0) > 122) return;
+        if (letter.length !== 1) return;
+        if (letter.charCodeAt(0) >= 1072 && letter.charCodeAt(0) <= 1103) {
+            showPopup('Change keyboarg language to English!')
+            return;
+        }
+        if (letter.charCodeAt(0) < 97 || letter.charCodeAt(0) > 122) return;
         gameState.update(letter);
     }
 
@@ -116,11 +121,12 @@ function addLetterSpaces(amount) {
 } 
 
 
-function showPopup() {
+function showPopup(text) {
     let popup = document.querySelector('.hangman__popup');
-    popup.style.left = 0;
+    popup.querySelector('p').textContent = text;
+    popup.classList.add('hangman__popup_show');
     setTimeout(() => {
-        popup.style.left = '-200px';
+        popup.classList.remove('hangman__popup_show');
     }, 1500);
 }
 
