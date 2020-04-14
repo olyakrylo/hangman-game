@@ -149,6 +149,14 @@ function addWrongLetter(letter) {
 
 function endGame(isWon) {
     let wordField = document.querySelector('.game__input');
+    if (!isWon) {
+        gameState.word.forEach((letter, i) => {
+            if (!gameState.usedLetters.has(letter)) {
+                wordField.children[i].style.color = 'red';
+            }
+            wordField.children[i].textContent = letter;
+        })
+    }
     let i = 0;
     let up = setInterval(() => {
         let child = wordField.children[i];
